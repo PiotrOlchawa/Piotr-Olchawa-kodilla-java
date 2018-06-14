@@ -26,7 +26,7 @@ public class CollectionTestSuite {
     }
 
     @Test
-    public void testOddNumbersExterminatorEmptyList() {
+    public void testOddNumbersExterminatorNormalList() {
 
         //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
@@ -49,7 +49,7 @@ public class CollectionTestSuite {
 
 
     @Test
-    public void testOddNumbersExterminatorNormalList() {
+    public void testOddNumbersExterminatorEmptyList() {
 
         //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
