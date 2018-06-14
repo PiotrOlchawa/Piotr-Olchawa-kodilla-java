@@ -31,34 +31,16 @@ import java.util.Iterator;
 
 public class OddNumbersExterminator {
 
+    ArrayList<Integer> exterminate(ArrayList<Integer> arrayList) {
 
-    ArrayList<Integer> exterminate(ArrayList<Integer> numbers) {
-
-        Iterator<Integer> iterator = numbers.iterator();
+        Iterator<Integer> iterator = arrayList.iterator();
 
         while (iterator.hasNext()) {
             if ((iterator.next() % 2) != 0) {
                 iterator.remove();
             }
         }
-        return numbers;
+        return arrayList;
     }
-    
-    
- /*
-    
-    public static void main(String[] args) {
-        
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        arrayList.add(1);
-        arrayList.add(2);
-        arrayList.add(3);
-        arrayList.add(4);
-        arrayList.add(5);
-        arrayList.add(6);
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-        System.out.println(oddNumbersExterminator.exterminate(arrayList));
-     }*/
-
 
 }
