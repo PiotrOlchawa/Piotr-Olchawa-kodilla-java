@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class CollectionTestSuite {
 
-    OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-    ArrayList<Integer> testArrayList = new ArrayList<>();
 
     @Before
     public void before() {
@@ -31,6 +29,8 @@ public class CollectionTestSuite {
     public void testOddNumbersExterminatorEmptyList() {
 
         //Given
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
+        ArrayList<Integer> testArrayList = new ArrayList<>();
         testArrayList.add(1);
         testArrayList.add(2);
         testArrayList.add(3);
@@ -41,7 +41,6 @@ public class CollectionTestSuite {
         resultArrayList.add(4);
 
         //When
-        System.out.println("Testing class " + oddNumbersExterminator.getClass().getSimpleName() + " method exterminate(ArrayList<Integer> arrayList) for " + testArrayList);
         testArrayList = oddNumbersExterminator.exterminate(testArrayList);
 
         //Then
@@ -53,10 +52,10 @@ public class CollectionTestSuite {
     public void testOddNumbersExterminatorNormalList() {
 
         //Given
-        testArrayList.clear();
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
+        ArrayList<Integer> testArrayList = new ArrayList<>();
 
         //When
-        System.out.println("Testing class " + oddNumbersExterminator.getClass().getSimpleName() + " method exterminate(ArrayList<Integer> arrayList) for empty list");
         testArrayList = oddNumbersExterminator.exterminate(testArrayList);
 
         //Then

@@ -33,14 +33,15 @@ public class OddNumbersExterminator {
 
     ArrayList<Integer> exterminate(ArrayList<Integer> arrayList) {
 
-        Iterator<Integer> iterator = arrayList.iterator();
+        ArrayList<Integer> temporaryArrayList = new ArrayList<>();
 
-        while (iterator.hasNext()) {
-            if ((iterator.next() % 2) != 0) {
-                iterator.remove();
+        for( Integer number : arrayList) {
+
+            if ((number % 2) == 0) {
+                temporaryArrayList.add(number);
             }
         }
-        return arrayList;
+        return temporaryArrayList;
     }
 
 }
