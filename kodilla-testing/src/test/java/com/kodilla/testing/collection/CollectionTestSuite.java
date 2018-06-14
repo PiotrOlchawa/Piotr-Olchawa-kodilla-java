@@ -11,10 +11,11 @@ Użyj również adnotacji @Before oraz @After, aby wyświetlić informację o ty
 import org.junit.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class CollectionTestSuite {
+
+    OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
+    ArrayList<Integer> testArrayList = new ArrayList<>();
 
     @Before
     public void before() {
@@ -30,8 +31,6 @@ public class CollectionTestSuite {
     public void testOddNumbersExterminatorEmptyList() {
 
         //Given
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-        ArrayList<Integer> testArrayList = new ArrayList<>();
         testArrayList.add(1);
         testArrayList.add(2);
         testArrayList.add(3);
@@ -54,8 +53,7 @@ public class CollectionTestSuite {
     public void testOddNumbersExterminatorNormalList() {
 
         //Given
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-        ArrayList<Integer> testArrayList = new ArrayList<>();
+        testArrayList.clear();
 
         //When
         System.out.println("Testing class " + oddNumbersExterminator.getClass().getSimpleName() + " method exterminate(ArrayList<Integer> arrayList) for empty list");
