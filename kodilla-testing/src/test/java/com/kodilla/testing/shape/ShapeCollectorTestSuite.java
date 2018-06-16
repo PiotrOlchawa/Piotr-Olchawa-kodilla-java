@@ -23,17 +23,12 @@ public class ShapeCollectorTestSuite {
 
         //Given
         ShapeCollector shapeCollector = new ShapeCollector();
-        ArrayList<Shape> testArrayList = new ArrayList<>();
-        boolean shapesEqual = true;
+        boolean removeSucessfull = true;
 
         Shape circleOne = new Circle(1.4);
         Square squareOne = new Square(4);
         Shape circleTwo = new Circle(1.5);  //will be removed
         Triangle triangleOne = new Triangle(1.4, 4.5);
-
-        testArrayList.add(circleOne);
-        testArrayList.add(triangleOne);
-        testArrayList.add(squareOne);
 
         //When
         shapeCollector.addFigure(circleOne);
@@ -42,14 +37,14 @@ public class ShapeCollectorTestSuite {
         shapeCollector.addFigure(squareOne);
         shapeCollector.removeFigure(circleTwo); //removing
 
-        for (int i = 0; i < testArrayList.size(); i++) {
-            if (!shapeCollector.getFigure(i).equals(testArrayList.get(i))) {
-                shapesEqual = false;
+        for (int i = 0; i < 3; i++) {
+            if (shapeCollector.getFigure(i).equals(circleTwo)) {
+                removeSucessfull = false;
             }
         }
 
         //Then
-        Assert.assertTrue(shapesEqual);
+        Assert.assertTrue(removeSucessfull);
     }
 
     @Test
