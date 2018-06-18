@@ -16,22 +16,33 @@ gdy liczba użytkowników = 100.*/
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+
 import java.util.ArrayList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ForumStatisticsTestSuite {
 
-    static Statistics statisticsMockPostZero = mock(Statistics.class);
-    static Statistics statisticsMockPost1000 = mock(Statistics.class);
-    static Statistics statisticsMockCommentsZero = mock(Statistics.class);
-    static Statistics statisticsMockCommentsLessThanPosts = mock(Statistics.class);
-    static Statistics statisticsMockCommentsMoreThanPosts = mock(Statistics.class);
-    static Statistics getStatisticsMockUsersZero = mock(Statistics.class);
-    static Statistics getGetStatisticsMockUsers100 = mock(Statistics.class);
+    @Mock
+    Statistics statisticsMockPostZero;
+    Statistics statisticsMockPost1000;
+    Statistics statisticsMockCommentsZero;
+    Statistics statisticsMockCommentsLessThanPosts;
+    Statistics statisticsMockCommentsMoreThanPosts;
+    Statistics getStatisticsMockUsersZero;
+    Statistics getGetStatisticsMockUsers100;
 
     @Before
     public void beforeTest() {
+
+        statisticsMockPostZero = mock(Statistics.class);
+        statisticsMockPost1000 = mock(Statistics.class);
+        statisticsMockCommentsZero = mock(Statistics.class);
+        statisticsMockCommentsLessThanPosts = mock(Statistics.class);
+        statisticsMockCommentsMoreThanPosts = mock(Statistics.class);
+        getStatisticsMockUsersZero = mock(Statistics.class);
+        getGetStatisticsMockUsers100 = mock(Statistics.class);
 
         ArrayList<String> userNamesList = new ArrayList<>();
         userNamesList.add("Max");
