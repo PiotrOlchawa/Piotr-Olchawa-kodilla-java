@@ -25,24 +25,16 @@ import static org.mockito.Mockito.when;
 public class ForumStatisticsTestSuite {
 
     @Mock
-    Statistics statisticsMockPostZero;
-    Statistics statisticsMockPost1000;
-    Statistics statisticsMockCommentsZero;
-    Statistics statisticsMockCommentsLessThanPosts;
-    Statistics statisticsMockCommentsMoreThanPosts;
-    Statistics getStatisticsMockUsersZero;
-    Statistics getGetStatisticsMockUsers100;
+    Statistics statisticsMockPostZero = mock(Statistics.class);
+    Statistics statisticsMockPost1000 = mock(Statistics.class);
+    Statistics statisticsMockCommentsZero = mock(Statistics.class);
+    Statistics statisticsMockCommentsLessThanPosts = mock(Statistics.class);
+    Statistics statisticsMockCommentsMoreThanPosts = mock(Statistics.class);
+    Statistics getStatisticsMockUsersZero = mock(Statistics.class);
+    Statistics getGetStatisticsMockUsers100 = mock(Statistics.class);
 
     @Before
     public void beforeTest() {
-
-        statisticsMockPostZero = mock(Statistics.class);
-        statisticsMockPost1000 = mock(Statistics.class);
-        statisticsMockCommentsZero = mock(Statistics.class);
-        statisticsMockCommentsLessThanPosts = mock(Statistics.class);
-        statisticsMockCommentsMoreThanPosts = mock(Statistics.class);
-        getStatisticsMockUsersZero = mock(Statistics.class);
-        getGetStatisticsMockUsers100 = mock(Statistics.class);
 
         ArrayList<String> userNamesList = new ArrayList<>();
         userNamesList.add("Max");
