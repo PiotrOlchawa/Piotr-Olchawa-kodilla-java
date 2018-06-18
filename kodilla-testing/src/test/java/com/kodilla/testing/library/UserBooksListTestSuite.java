@@ -23,7 +23,7 @@ public class UserBooksListTestSuite {
         // When
         List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
         // Then
-        Assert.assertEquals(resultListOfBooks.size(),theListOfBooks.size());
+        Assert.assertEquals(0,theListOfBooks.size());
     }
 
     //gdy ma wypożyczoną jedną książkę,
@@ -40,7 +40,7 @@ public class UserBooksListTestSuite {
         // When
         List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
         // Then
-        Assert.assertEquals(resultListOfBooks.size(),theListOfBooks.size());
+        Assert.assertEquals(1,theListOfBooks.size());
     }
 
     //gdy ma wypożyczonych 5 książek.
@@ -65,6 +65,6 @@ public class UserBooksListTestSuite {
         // When
         List<Book> theListOfBooks = bookLibrary.listBooksInHandsOf(libraryUser);
         // Then
-        Assert.assertEquals(resultListOfBooks.size(),theListOfBooks.size());
+        Assert.assertEquals(5,theListOfBooks.size());
     }
 }
