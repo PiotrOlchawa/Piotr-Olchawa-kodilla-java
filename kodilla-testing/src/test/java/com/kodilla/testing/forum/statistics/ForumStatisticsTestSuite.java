@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 public class ForumStatisticsTestSuite {
 
-    @Mock
     Statistics statisticsMockPostZero = mock(Statistics.class);
     Statistics statisticsMockPost1000 = mock(Statistics.class);
     Statistics statisticsMockCommentsZero = mock(Statistics.class);

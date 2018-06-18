@@ -21,7 +21,6 @@ public class BookDirectoryTestSuite {
         return resultList;
     }
 
-
     @Test
     public void testListBooksWithConditionsReturnList() {
         // Given
