@@ -16,13 +16,9 @@ gdy liczba użytkowników = 100.*/
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-@SuppressWarnings("Duplicates")
 
 public class ForumStatisticsTestSuite {
 
