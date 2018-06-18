@@ -33,7 +33,6 @@ public class ForumStatisticsTestSuite {
     static Statistics statisticsMockCommentsMoreThanPosts = mock(Statistics.class);
     static Statistics getStatisticsMockUsersZero = mock(Statistics.class);
     static Statistics getGetStatisticsMockUsers100 = mock(Statistics.class);
-    static ForumStatistics forumStatistics = new ForumStatistics();
 
     @Before
     public void beforeTest() {
@@ -86,6 +85,9 @@ public class ForumStatisticsTestSuite {
     //gdy liczba postów = 0,
     @Test
     public void testCalculateAdvStatisticsPostZero() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
+
         //When
         forumStatistics.calculateAdvStatistics(statisticsMockPostZero);
         int totalPosts = forumStatistics.getTotalPosts();
@@ -102,6 +104,8 @@ public class ForumStatisticsTestSuite {
     //gdy liczba postów = 1000
     @Test
     public void testCalculateAdvStatisticsPost1000() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
 
         //When
         forumStatistics.calculateAdvStatistics(statisticsMockPost1000);
@@ -119,6 +123,8 @@ public class ForumStatisticsTestSuite {
     //gdy liczba komentarzy = 0,
     @Test
     public void testCalculateAdvStatisticsCommentsZero() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
 
         //When
         forumStatistics.calculateAdvStatistics(statisticsMockCommentsZero);
@@ -136,6 +142,8 @@ public class ForumStatisticsTestSuite {
     //gdy liczba komentarzy < liczba postów
     @Test
     public void testCalculateAdvStatisticsCommentsLessThanPosts() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
 
         //When
         forumStatistics.calculateAdvStatistics(statisticsMockCommentsLessThanPosts);
@@ -155,6 +163,8 @@ public class ForumStatisticsTestSuite {
     //gdy liczba komentarzy > liczba postów,
     @Test
     public void testCalculateAdvStatisticsCommentsMoreThanPosts() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
 
         //When
         forumStatistics.calculateAdvStatistics(statisticsMockCommentsMoreThanPosts);
@@ -173,6 +183,9 @@ public class ForumStatisticsTestSuite {
     //gdy liczba użytkowników = 0,
     @Test
     public void testCalculateAdvStatisticsUsersZero() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
+
         //When
         forumStatistics.calculateAdvStatistics(getStatisticsMockUsersZero);
         int totalUsers = forumStatistics.getTotalUsers();
@@ -188,6 +201,9 @@ public class ForumStatisticsTestSuite {
     //gdy liczba użytkowników = 100
     @Test
     public void testCalculateAdvStatisticsUsers100() {
+        //Given
+        ForumStatistics forumStatistics = new ForumStatistics();
+
         //When
         forumStatistics.calculateAdvStatistics(getGetStatisticsMockUsers100);
         int totalUsers = forumStatistics.getTotalUsers();
