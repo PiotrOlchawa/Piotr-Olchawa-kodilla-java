@@ -1,17 +1,3 @@
-/*Twoim zadaniem jest stworzenie kolekcji składającej się z obiektów opisujących użytkowników forum. Następnie, przy pomocy Stream powinieneś przekształcić tę kolekcję w mapę zawierającą tych użytkowników forum, którzy mają nie mniej niż 20 lat, są mężczyznami i mają co najmniej jeden opublikowany post.
-
-Aby zrealizować zadanie wykonaj:
-
- Stwórz w katalogu src/main/java pakiet com.kodilla.stream.forumuser, a w nim klasę ForumUser
- Klasa ForumUser powinna mieć następujące pola (użyj odpowiednich nazw angielskich):
- unikalny identyfikator użytkownika (typu int)
- nazwa użytkownika (typu String)
- płeć (typu char), z wartościami ‘M’/’F’
- data urodzenia (typu LocalDate)
- ilość opublikowanych postów (typu int)
-
-*/
-
 package com.kodilla.stream.forumuser;
 
 import java.time.LocalDate;
