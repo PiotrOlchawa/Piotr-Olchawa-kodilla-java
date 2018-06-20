@@ -3,7 +3,7 @@
 Utwórz w pakiecie com.kodilla.stream.immutable klasę ForumUser, zawierającą pola String username, String realName oraz konstruktor i gettery
 Spraw, aby utworzona klasa była niemutowalna poprzez odpowiednie użycie słowa kluczowego final
 Upewnij się, że wszystkie pola klasy są oznaczone jako private
-Prześlij kod do repozytorium Github.*/
+*/
 
 
 package com.kodilla.stream.immutable;
@@ -25,4 +25,5 @@ public class ForumUser {
     public String getRealName() {
         return realName;
     }
+
 }

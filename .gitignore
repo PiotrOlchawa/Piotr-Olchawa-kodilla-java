@@ -11,4 +11,11 @@
 
 ### Kodilla Testing ###
 /kodilla-testing/out/
+/kodilla-testing/build/
+
+
+### Kodilla Stream ###
+kodilla-testing/src/test/java/com/kodilla/testing/forum/statistics/ForumStatisticsTestSuiteCustom[0-9].java
+/kodilla-stream/build/
+/kodilla-stream/out/
 
