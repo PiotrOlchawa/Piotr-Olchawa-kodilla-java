@@ -10,8 +10,7 @@ public interface ArrayOperations {
 
         return IntStream.range(0, numbers.length)
                 .map(l -> numbers[l])
-                .average().getAsDouble();
-
-
+                .average()
+                .getAsDouble();
     }
 }

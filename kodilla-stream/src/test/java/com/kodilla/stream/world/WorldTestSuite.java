@@ -29,13 +29,8 @@ public class WorldTestSuite {
         world.addContinent(asia);
         world.addContinent(africa);
         //When
-        BigDecimal worldPopulation = poland.getPeopleQuantity()
-                .add(germany.getPeopleQuantity())
-                .add(china.getPeopleQuantity())
-                .add(japan.getPeopleQuantity())
-                .add(egypt.getPeopleQuantity())
-                .add(keynia.getPeopleQuantity());
+        BigDecimal totalPopulation = world.getPeopleQuantity();
         //Then
-        Assert.assertEquals(worldPopulation, world.getPeopleQuantity());
+        Assert.assertEquals(new BigDecimal("550609074578093102916"), totalPopulation);
     }
 }
