@@ -111,4 +111,8 @@ public class GameCommander {
     private void badGameEndActionInput() {
         System.out.println("Incorrect action, please select valid action (n) or (x) ");
     }
+
+    public void showFileNotFound(String configFile) {
+        System.out.println("Game Configuration file " + configFile + " not found, using defaults.");
+    }
 }

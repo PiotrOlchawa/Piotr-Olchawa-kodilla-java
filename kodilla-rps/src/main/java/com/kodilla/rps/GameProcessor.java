@@ -19,14 +19,14 @@ SCISSORS   -1          1       0
         this.computer = computer;
     }
 
-
-    public void playGame(GameCommander gameCommander) {
+    public void playGame(GameCommander gameCommander, GameConfigurator gameConfigurator) {
+        String computerPlayerMode = gameConfigurator.getComputerMode();
         do {
             resetPlayersRoundsWin();
             maxWins = gameCommander.getMaxWins();
             while (hasNextRound()) {
                 userPlayer.setMove(gameCommander.getGameSubject());
-                gameCommander.showWinner(getRoundWinner());
+                gameCommander.showWinner(getPlayerAsWinner(getRoundResult(computerPlayerMode)));
             }
             gameCommander.showFinalResults(userPlayer, computer);
 
@@ -42,9 +42,17 @@ SCISSORS   -1          1       0
         return computer.getRoundsWin() < maxWins && userPlayer.getRoundsWin() < maxWins;
     }
 
-    private Player getRoundWinner() {
+    private int getRoundResult(String computerPlayerMode) {
+        int playerMove = userPlayer.getMove();
+        if (computerPlayerMode.equals("Cheater")) {
+            return crossRules[playerMove][computer.getMove(playerMove,crossRules)];
+        } else {
+            return crossRules[playerMove][computer.getMove()];
+        }
+    }
 
-        int roundResult = crossRules[userPlayer.getMove()][computer.getMove()];
+    private Player getPlayerAsWinner(int roundResult) {
+
         if (roundResult == -1) {
             computer.setRoundsWin(computer.getRoundsWin() + 1);
             return computer;
@@ -55,5 +63,4 @@ SCISSORS   -1          1       0
         }
         return null;
     }
-
 }
