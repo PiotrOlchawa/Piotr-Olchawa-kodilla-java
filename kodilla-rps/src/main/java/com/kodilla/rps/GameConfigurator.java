@@ -6,29 +6,27 @@ import java.util.Scanner;
 
 public class GameConfigurator {
 
-    private Scanner scanner;
     private String computerMode;
+    private static final String OPTION_READY = "Ready";
+    private static final String OPTION_NORMAL = "Normal";
 
     public GameConfigurator(String configFile, GameCommander gameCommander) {
         try {
-            scanner = new Scanner(new File(configFile));
-            setConfiugurationParamState("Ready");
+            Scanner scanner = new Scanner(new File(configFile));
+            String param = scanner.nextLine();
+
+            if (param.equals(OPTION_READY) || param.equals(OPTION_NORMAL)) {
+                this.computerMode = param;
+            } else {
+                this.computerMode = OPTION_NORMAL;
+            }
         } catch (FileNotFoundException e) {
             gameCommander.showFileNotFound(configFile);
-            computerMode = "Normal";
+            this.computerMode = OPTION_NORMAL;
         }
     }
 
     public String getComputerMode() {
-
-        if (computerMode.equals("Ready")) {
-            return scanner.nextLine();
-        } else {
-            return computerMode;
-        }
-    }
-
-    private void setConfiugurationParamState(String state){
-        this.computerMode = state;
+        return this.computerMode;
     }
 }

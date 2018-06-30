@@ -6,17 +6,18 @@ public class ComputerPlayer extends Player {
 
     private static final Random RANDOM = new Random();
     private static final String COMPUTER = "Computer";
-    private static int moveCounter = 1;
 
-    public ComputerPlayer() {
-        super(new String(COMPUTER));
+    ComputerPlayer() {
+        super(COMPUTER);
     }
 
     public int getMove() {
         return RANDOM.nextInt(3);
     }
 
-    public int getMove(int playerMove, int[][] crossRules) {
+    // random (3) player comp tile
+
+    int getMove(int playerMove, int[][] crossRules, int moveCounter) {
 
         // Tile
         if (moveCounter % 1+RANDOM.nextInt(3) == 0) {

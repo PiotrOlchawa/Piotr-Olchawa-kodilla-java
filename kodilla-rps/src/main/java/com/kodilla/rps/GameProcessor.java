@@ -1,25 +1,27 @@
-package com.kodilla.rps;
-
-public class GameProcessor {
-
-    private UserPlayer userPlayer;
-    private ComputerPlayer computer;
-    private int maxWins;
-    private int[][] crossRules = {{0, -1, 1}, {1, 0, -1}, {-1, 1, 0}};
-
-    /*           Subject map
+/*           Subject map
            STONE    PAPER    SCISSORS
 STONE       0         -1       1
 PAPER       1          0      -1
 SCISSORS   -1          1       0
 */
 
-    public GameProcessor(UserPlayer player, ComputerPlayer computer) {
+package com.kodilla.rps;
+
+public class GameProcessor {
+
+    private static final String CHEATER_OPTIONS = "Cheater";
+    private static final int[][] CROSS_RULES = {{0, -1, 1}, {1, 0, -1}, {-1, 1, 0}};
+    private UserPlayer userPlayer;
+    private ComputerPlayer computer;
+    private int maxWins;
+    private int moveCounter = 1;
+
+    GameProcessor(UserPlayer player, ComputerPlayer computer) {
         this.userPlayer = player;
         this.computer = computer;
     }
 
-    public void playGame(GameCommander gameCommander, GameConfigurator gameConfigurator) {
+    void playGame(GameCommander gameCommander, GameConfigurator gameConfigurator) {
         String computerPlayerMode = gameConfigurator.getComputerMode();
         do {
             resetPlayersRoundsWin();
@@ -44,10 +46,10 @@ SCISSORS   -1          1       0
 
     private int getRoundResult(String computerPlayerMode) {
         int playerMove = userPlayer.getMove();
-        if (computerPlayerMode.equals("Cheater")) {
-            return crossRules[playerMove][computer.getMove(playerMove,crossRules)];
+        if (computerPlayerMode.equals(CHEATER_OPTIONS)) {
+            return CROSS_RULES[playerMove][computer.getMove(playerMove, CROSS_RULES, moveCounter++)];
         } else {
-            return crossRules[playerMove][computer.getMove()];
+            return CROSS_RULES[playerMove][computer.getMove()];
         }
     }
 
