@@ -15,36 +15,28 @@ public class ComputerPlayer extends Player {
         return RANDOM.nextInt(3);
     }
 
-    // random (3) player comp tile
+    int getMove(int playerMove, int[][] crossRules) {
 
-    int getMove(int playerMove, int[][] crossRules, int moveCounter) {
+        int winnerSelector = RANDOM.nextInt(3);
 
         // Tile
-        if (moveCounter % 1+RANDOM.nextInt(3) == 0) {
+        if (winnerSelector == 0) {
             for (int i = 0; i < crossRules[playerMove].length; i++) {
                 if (crossRules[playerMove][i] == 0) {
-                    moveCounter++;
                     return i;
                 }
             }
         }
         // Computer win
-        if (moveCounter % 4 != 0) {
+        if (winnerSelector == 2) {
             for (int i = 0; i < crossRules[playerMove].length; i++) {
                 if (crossRules[playerMove][i] == -1) {
-                    moveCounter++;
-                    return i;
-                }
-            }
-        // Player win
-        } else {
-            for (int i = 0; i < crossRules[playerMove].length; i++) {
-                if (crossRules[playerMove][i] == 1) {
-                    moveCounter++;
                     return i;
                 }
             }
         }
-        return 0;
+        // Random move
+        return getMove();
     }
 }
+

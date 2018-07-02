@@ -1,23 +1,23 @@
 package com.kodilla.rps;
 
-public abstract class Player {
+abstract class Player {
 
     private String playerName;
     private int roundsWin = 0;
 
-    public Player(String gameUserName) {
+    Player(String gameUserName) {
         this.playerName = gameUserName;
     }
 
-    public int getRoundsWin() {
+    int getRoundsWin() {
         return roundsWin;
     }
 
-    public void setRoundsWin(int roundsWin) {
+    void setRoundsWin(int roundsWin) {
         this.roundsWin = roundsWin;
     }
 
-    public String getPlayerName() {
+    String getPlayerName() {
         return playerName;
     }
 

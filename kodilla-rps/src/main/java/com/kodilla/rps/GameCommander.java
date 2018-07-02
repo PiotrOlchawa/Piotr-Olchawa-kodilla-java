@@ -2,11 +2,11 @@ package com.kodilla.rps;
 
 import java.util.Scanner;
 
-public class GameCommander {
+class GameCommander {
 
     private Scanner scanner = new Scanner(System.in);
 
-    public String getPlayerName() {
+    String getPlayerName() {
         askForName();
         while (true) {
             String input = scanner.nextLine();
@@ -18,7 +18,7 @@ public class GameCommander {
         }
     }
 
-    public int getMaxWins() {
+    int getMaxWins() {
         askForRounds();
         while (true) {
             try {
@@ -34,7 +34,7 @@ public class GameCommander {
         }
     }
 
-    public int getGameSubject() {
+    int getGameSubject() {
         askForSubject();
         while (true) {
             try {
@@ -50,7 +50,7 @@ public class GameCommander {
         }
     }
 
-    public boolean getGameEndAction() {
+    boolean getGameEndAction() {
         askForGameEndAction();
         while (true) {
             String gameEndAction = scanner.nextLine();
@@ -62,7 +62,7 @@ public class GameCommander {
         }
     }
 
-    public void showWinner(Player player) {
+    void showWinner(Player player) {
 
         if (player == null) {
             System.out.println("Tile");
@@ -71,7 +71,7 @@ public class GameCommander {
         }
     }
 
-    public void showFinalResults(Player player1, Player player2) {
+    void showFinalResults(Player player1, Player player2) {
         System.out.printf("\n%43s", "RESULTS\n");
         System.out.println("--------------------------------------------------------------------------------------");
         System.out.printf("\n%30s%25s\n", "Player: " + player1.getPlayerName(), "Player: " + player2.getPlayerName());
@@ -112,7 +112,7 @@ public class GameCommander {
         System.out.println("Incorrect action, please select valid action (n) or (x) ");
     }
 
-    public void showFileNotFound(String configFile) {
+    void showFileNotFound(String configFile) {
         System.out.println("Game Configuration file " + configFile + " not found, using defaults.");
     }
 }

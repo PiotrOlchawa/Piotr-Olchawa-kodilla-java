@@ -7,14 +7,13 @@ SCISSORS   -1          1       0
 
 package com.kodilla.rps;
 
-public class GameProcessor {
+class GameProcessor {
 
     private static final String CHEATER_OPTIONS = "Cheater";
     private static final int[][] CROSS_RULES = {{0, -1, 1}, {1, 0, -1}, {-1, 1, 0}};
     private UserPlayer userPlayer;
     private ComputerPlayer computer;
     private int maxWins;
-    private int moveCounter = 1;
 
     GameProcessor(UserPlayer player, ComputerPlayer computer) {
         this.userPlayer = player;
@@ -27,8 +26,7 @@ public class GameProcessor {
             resetPlayersRoundsWin();
             maxWins = gameCommander.getMaxWins();
             while (hasNextRound()) {
-                userPlayer.setMove(gameCommander.getGameSubject());
-                gameCommander.showWinner(getPlayerAsWinner(getRoundResult(computerPlayerMode)));
+                gameCommander.showWinner(getPlayerAsWinner(getRoundResult(computerPlayerMode, userPlayer.getMove(gameCommander))));
             }
             gameCommander.showFinalResults(userPlayer, computer);
 
@@ -44,10 +42,9 @@ public class GameProcessor {
         return computer.getRoundsWin() < maxWins && userPlayer.getRoundsWin() < maxWins;
     }
 
-    private int getRoundResult(String computerPlayerMode) {
-        int playerMove = userPlayer.getMove();
+    private int getRoundResult(String computerPlayerMode,int playerMove) {
         if (computerPlayerMode.equals(CHEATER_OPTIONS)) {
-            return CROSS_RULES[playerMove][computer.getMove(playerMove, CROSS_RULES, moveCounter++)];
+            return CROSS_RULES[playerMove][computer.getMove(playerMove, CROSS_RULES)];
         } else {
             return CROSS_RULES[playerMove][computer.getMove()];
         }

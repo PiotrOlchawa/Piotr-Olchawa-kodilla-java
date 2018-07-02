@@ -1,6 +1,6 @@
 package com.kodilla.rps;
 
-public class RpsRunner {
+class RpsRunner {
 
     private static final String CONFIG_FILE = "config.txt";
 
