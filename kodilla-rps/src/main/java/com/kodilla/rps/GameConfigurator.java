@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 class GameConfigurator {
 
-    private String computerMode;
     private static final String OPTION_CHEATER = "Cheater";
     private static final String OPTION_NORMAL = "Normal";
+    private String computerMode;
 
     GameConfigurator(String configFile, GameCommander gameCommander) {
         try {
