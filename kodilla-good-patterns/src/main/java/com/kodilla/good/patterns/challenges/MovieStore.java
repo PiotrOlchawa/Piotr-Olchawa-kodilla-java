@@ -39,8 +39,6 @@ class MovieStore {
         String allTitles = movieStoreMap.entrySet().stream()
                 .flatMap(l -> l.getValue().stream())
                 .collect(Collectors.joining("!"));
-
         System.out.println(allTitles);
-
     }
 }
