@@ -26,7 +26,7 @@ class GameProcessor {
             resetPlayersRoundsWin();
             maxWins = gameCommander.getMaxWins();
             while (hasNextRound()) {
-                gameCommander.showWinner(getPlayerAsWinner(getRoundResult(computerPlayerMode, userPlayer.getMove(gameCommander))));
+                gameCommander.showWinner(getPlayerAsWinner(getRoundResult(computerPlayerMode, userPlayer.getMove())));
             }
             gameCommander.showFinalResults(userPlayer, computer);
 

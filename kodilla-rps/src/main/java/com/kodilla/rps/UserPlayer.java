@@ -8,11 +8,6 @@ class UserPlayer extends Player {
 
     @Override
     public int getMove() {
-        return 0;
+       return GameCommander.getGameSubject();
     }
-
-    int getMove(GameCommander gameCommander) {
-        return gameCommander.getGameSubject();
-    }
-
 }

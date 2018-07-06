@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 class GameCommander {
 
-    private Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     String getPlayerName() {
         askForName();
         while (true) {
-            String input = scanner.nextLine();
+            String input = SCANNER.nextLine();
             if (input.length() >= 1) {
                 return input;
             } else {
@@ -22,7 +22,7 @@ class GameCommander {
         askForRounds();
         while (true) {
             try {
-                int maxWins = Integer.parseInt(scanner.nextLine());
+                int maxWins = Integer.parseInt(SCANNER.nextLine());
                 if (maxWins < 1) {
                     badMaxWinsInput();
                 } else {
@@ -34,11 +34,11 @@ class GameCommander {
         }
     }
 
-    int getGameSubject() {
+    static int getGameSubject() {
         askForSubject();
         while (true) {
             try {
-                int subjectIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                int subjectIndex = Integer.parseInt(SCANNER.nextLine()) - 1;
                 if (subjectIndex < 0 || subjectIndex > 2) {
                     badSubjectInput();
                 } else {
@@ -53,7 +53,7 @@ class GameCommander {
     boolean getGameEndAction() {
         askForGameEndAction();
         while (true) {
-            String gameEndAction = scanner.nextLine();
+            String gameEndAction = SCANNER.nextLine();
             if (gameEndAction.length() != 1 || (gameEndAction.charAt(0) != 'x' && gameEndAction.charAt(0) != 'n')) {
                 badGameEndActionInput();
             } else {
@@ -88,7 +88,7 @@ class GameCommander {
         System.out.println("Please Enter number of points after player wins.");
     }
 
-    private void askForSubject() {
+    private static void askForSubject() {
         System.out.println("Please select between (1)STONE (2)SCISSORS (3)PAPAER");
     }
 
@@ -100,11 +100,11 @@ class GameCommander {
         System.out.println("Incorrect name , please enter valid Name");
     }
 
-    private void badMaxWinsInput() {
+    private static void badMaxWinsInput() {
         System.out.println("Inccorect number, please enter valid number");
     }
 
-    private void badSubjectInput() {
+    private static void badSubjectInput() {
         System.out.println("Incorrect subject, please select correct object");
     }
 
