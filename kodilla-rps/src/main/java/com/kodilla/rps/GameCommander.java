@@ -6,6 +6,17 @@ class GameCommander {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private static final String WELCOME = "Welcome to STONE SCISSORS PAPER Game";
+    private static final String INPUT_NEAME = "Please enter your name ";
+    private static final String INPUT_MAX_POINTS = "Please Enter number of points after player wins.";
+    private static final String SELECT_SUBJECT = "Please select between (1)STONE (2)SCISSORS (3)PAPER";
+    private static final String INPUT_END_OPTION = "Game was ended. Please enter (n) for new game or (x) for exit";
+    private static final String BAD_NAME_INPUT = "Incorrect name , please enter valid Name";
+    private static final String BAD_MAXWINS_INPUT = "Inccorect number, please enter valid number";
+    private static final String BAD_SUBJECT_INPUT = "Incorrect subject, please select correct object";
+    private static final String BAD_END_ACTION = "Incorrect action, please select valid action (n) or (x) ";
+    private static final String BAD_CONFIG_FILE = "Game Configuration file not found, using defaults.";
+
     String getPlayerName() {
         askForName();
         while (true) {
@@ -80,39 +91,39 @@ class GameCommander {
     }
 
     private void askForName() {
-        System.out.println("Welcome to STONE SCISSORS PAPER Game");
-        System.out.println("Please enter your name ");
+        System.out.println(WELCOME);
+        System.out.println(INPUT_NEAME);
     }
 
     private void askForRounds() {
-        System.out.println("Please Enter number of points after player wins.");
+        System.out.println(INPUT_MAX_POINTS);
     }
 
     private static void askForSubject() {
-        System.out.println("Please select between (1)STONE (2)SCISSORS (3)PAPAER");
+        System.out.println(SELECT_SUBJECT);
     }
 
     private void askForGameEndAction() {
-        System.out.println("Game was ended. Please enter (n) for new game or (x) for exit");
+        System.out.println(INPUT_END_OPTION);
     }
 
     private void badNameInput() {
-        System.out.println("Incorrect name , please enter valid Name");
+        System.out.println(BAD_NAME_INPUT);
     }
 
     private static void badMaxWinsInput() {
-        System.out.println("Inccorect number, please enter valid number");
+        System.out.println(BAD_MAXWINS_INPUT);
     }
 
     private static void badSubjectInput() {
-        System.out.println("Incorrect subject, please select correct object");
+        System.out.println(BAD_SUBJECT_INPUT);
     }
 
     private void badGameEndActionInput() {
-        System.out.println("Incorrect action, please select valid action (n) or (x) ");
+        System.out.println(BAD_END_ACTION);
     }
 
     void showFileNotFound(String configFile) {
-        System.out.println("Game Configuration file " + configFile + " not found, using defaults.");
+        System.out.println(BAD_CONFIG_FILE + configFile);
     }
 }
