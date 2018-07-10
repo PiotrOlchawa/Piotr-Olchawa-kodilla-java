@@ -6,13 +6,13 @@ class GameCommander {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private static final String WELCOME = "Welcome to STONE SCISSORS PAPER Game";
-    private static final String INPUT_NEAME = "Please enter your name ";
+    private static final String SHOW_WELCOME = "Welcome to STONE SCISSORS PAPER Game";
+    private static final String INPUT_NAME = "Please enter your name ";
     private static final String INPUT_MAX_POINTS = "Please Enter number of points after player wins.";
-    private static final String SELECT_SUBJECT = "Please select between (1)STONE (2)SCISSORS (3)PAPER";
+    private static final String INPUT_SUBJECT = "Please select between (1)STONE (2)SCISSORS (3)PAPER";
     private static final String INPUT_END_OPTION = "Game was ended. Please enter (n) for new game or (x) for exit";
     private static final String BAD_NAME_INPUT = "Incorrect name , please enter valid Name";
-    private static final String BAD_MAXWINS_INPUT = "Inccorect number, please enter valid number";
+    private static final String BAD_MAXWINS_INPUT = "Incorrect number, please enter valid number";
     private static final String BAD_SUBJECT_INPUT = "Incorrect subject, please select correct object";
     private static final String BAD_END_ACTION = "Incorrect action, please select valid action (n) or (x) ";
     private static final String BAD_CONFIG_FILE = "Game Configuration file not found, using defaults.";
@@ -91,8 +91,8 @@ class GameCommander {
     }
 
     private void askForName() {
-        System.out.println(WELCOME);
-        System.out.println(INPUT_NEAME);
+        System.out.println(SHOW_WELCOME);
+        System.out.println(INPUT_NAME);
     }
 
     private void askForRounds() {
@@ -100,7 +100,7 @@ class GameCommander {
     }
 
     private static void askForSubject() {
-        System.out.println(SELECT_SUBJECT);
+        System.out.println(INPUT_SUBJECT);
     }
 
     private void askForGameEndAction() {
