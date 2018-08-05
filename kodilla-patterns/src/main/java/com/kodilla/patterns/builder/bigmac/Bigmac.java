@@ -1,26 +1,6 @@
 package com.kodilla.patterns.builder.bigmac;
 
-/*Celem zadania jest przećwiczenie użycia wzorca Builder. Stworzymy klasę reprezentującą popularną kanapkę BigMac.
- Ma ona zestaw domyślnych składników, można ją również "rozszerzać" o niestandardowe składniki, np. bekon.
-
-Aby zrealizować zadanie:
-
-W katalogu src/main/java utwórz pakiet com.kodilla.patterns.builder.bigmac.
-
-W tym pakiecie utwórz klasę Bigmac, zawierającą następujące pola:
-bun (pol. bułka do hamburgera (w odróżnieniu od roll — - zwykłej bułki — może być z sezamem lub bez),
-burgers — oznaczającą ilość kotletów wołowych w środku kanapki,
-sauce — oznaczającą rodzaj użytego sosu (standard, 1000 wysp, barbecue),
-ingredients — oznaczającą listę składników dodatkowych (możliwe wartości to: sałata, cebula, bekon, ogórek, papryczki chilli, pieczarki, krewetki, ser).
-
-Stwórz wewnętrzną klasę BigmacBuilder zgodną ze wzorcem Builder.
-
-W katalogu src/test/java utwórz pakiet com.kodilla.patterns.builder.bigmac.
-Stwórz zestaw testów o nazwie BigmacTestSuite oraz test sprawdzający, czy wzorzec Builder działa prawidłowo.
-*/
-
 import java.util.*;
-import java.util.stream.Stream;
 
 public final class Bigmac {
 
