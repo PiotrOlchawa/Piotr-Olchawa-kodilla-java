@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
+    EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany(){
@@ -60,4 +61,42 @@ public class CompanyDaoTestSuite {
         //    //do nothing
         //}
     }
+
+    @Test
+    public void testQueries(){
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Grey Matter");
+
+        companyDao.save(softwareMachine);
+        companyDao.save(dataMaesters);
+        companyDao.save(greyMatter);
+
+        employeeDao.save(johnSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+
+        //When
+        int companies = companyDao.retrieveCompanyNameStartsWith("Sof").size();
+        int employees = employeeDao.retrieveEmployeeWithLastName("Smith").size();
+
+        //Then
+        Assert.assertEquals(1,companies);
+        Assert.assertEquals(1,employees);
+
+        //CleanUp
+        companyDao.delete(softwareMachine.getId());
+        companyDao.delete(dataMaesters.getId());
+        companyDao.delete(greyMatter.getId());
+
+        employeeDao.delete(johnSmith.getId());
+        employeeDao.delete(stephanieClarckson.getId());
+        employeeDao.delete(lindaKovalsky);
+    }
+
 }
