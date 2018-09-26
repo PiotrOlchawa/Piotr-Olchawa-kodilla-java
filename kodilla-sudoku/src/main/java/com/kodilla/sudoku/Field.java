@@ -1,5 +1,8 @@
 package com.kodilla.sudoku;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,25 +11,14 @@ public class Field {
 
     public static final int NO_VALUE = -1;
     public static final int MAX_VALUE = 9;
-
+    @Getter
     private List<Integer> availableValueList = new ArrayList<>();
+    @Getter
+    @Setter
     private int value = NO_VALUE;
 
     Field() {
         defaultAvaliableValueList();
-    }
-
-
-    public List<Integer> getAvailableValueList() {
-        return availableValueList;
-    }
-
-    void setValue(int value) {
-        this.value = value;
-    }
-
-    int getValue() {
-        return value;
     }
 
     boolean checkAvailiableValue(int value) {
@@ -35,6 +27,13 @@ public class Field {
 
     void deleteValue(int value) {
         availableValueList.remove(Integer.valueOf(value));
+    }
+
+    boolean hasNoValue(){
+        if(value == NO_VALUE){
+            return true;
+        }
+        return false;
     }
 
     void resetAvailableValueList() {
@@ -50,4 +49,7 @@ public class Field {
         this.availableValueList = new ArrayList<>(Arrays.asList(valueList));
     }
 
+    public void resetField() {
+        this.value = NO_VALUE;
+    }
 }

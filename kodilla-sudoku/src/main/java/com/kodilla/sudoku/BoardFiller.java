@@ -1,10 +1,70 @@
 package com.kodilla.sudoku;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class BoardFiller {
 
-    private LinkedList<FilerEntity> filerEntity;
+    private static Random RANDOM = new Random();
+    private List<FillerEntity> fillerEntities = new ArrayList<>();
+    @Getter
+    @Setter
+    private Board board;
+
+    public BoardFiller(Board board) {
+        this.board = board;
+    }
+
+    void fillField() throws CloneNotSupportedException {
+        int rowCoordinate, columnCoordinate;
+        FillerEntity fillerEntity = new FillerEntity();
+        fillerEntity.setBoard(board.deepCopy());
+
+        do {
+            rowCoordinate = randomCoordinateSelector();
+            columnCoordinate = randomCoordinateSelector();
+        } while (!fieldHasNoValue(rowCoordinate, columnCoordinate));
+
+        Field field = board.getFields()[rowCoordinate][columnCoordinate];
+        int randomlySelectedValue = randomAvaliableValueSelector(field.getAvailableValueList().size());
+        field.setValue(field.getAvailableValueList().get(randomlySelectedValue));
+        fillerEntity.setRowCoordinate(rowCoordinate);
+        fillerEntity.setColumnCoordinate(columnCoordinate);
+
+        fillerEntities.add(fillerEntity);
+    }
+
+    boolean recoverFromFillField(){
+        if(fillerEntities.size()!=0){
+            FillerEntity lastEntity = fillerEntities.get(fillerEntities.size() - 1);
+            this.board = lastEntity.getBoard();
+            int row = lastEntity.getRowCoordinate();
+            int column = lastEntity.getColumnCoordinate();
+            Field field = this.board.getFields()[row][column];
+            field.resetField();
+            field.deleteValue(lastEntity.getFieldValue());
+        return true;
+        }
+        return false;
+    }
+
+
+    private int randomCoordinateSelector() {
+        return RANDOM.nextInt(Board.BOARD_SIZE);
+    }
+
+    private int randomAvaliableValueSelector(int value) {
+        return RANDOM.nextInt(value);
+    }
+
+    private boolean fieldHasNoValue(int row, int column) {
+        return board.getFields()[row][column].hasNoValue();
+    }
 
 
     static Board testFiller() {
@@ -50,6 +110,4 @@ public class BoardFiller {
 
         return board;
     }
-
-
 }

@@ -39,8 +39,7 @@ public class Board extends Prototype {
         }
     }
 
-    public boolean isCompleted() {
-
+    public boolean isBoardCompleted() {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (fields[i][j].getValue() == Field.NO_VALUE) {
@@ -52,11 +51,11 @@ public class Board extends Prototype {
     }
 
     public Board shallowCopy() throws CloneNotSupportedException {
-        return (Board)super.clone();
+        return (Board) super.clone();
     }
 
     public Board deepCopy() throws CloneNotSupportedException {
-        Board clonedBoard = (Board)super.clone();
+        Board clonedBoard = (Board) super.clone();
         clonedBoard.fields = new Field[BOARD_SIZE][BOARD_SIZE];
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             for (int column = 0; column < Board.BOARD_SIZE; column++) {

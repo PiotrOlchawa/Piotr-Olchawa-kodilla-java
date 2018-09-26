@@ -40,7 +40,7 @@ public class Resolver {
             }
         }
 
-        if (board.isCompleted()) {
+        if (board.isBoardCompleted()) {
             return true;
         }
         log.debug("pr " + pr + " pc " + pc + " ps " + ps);
