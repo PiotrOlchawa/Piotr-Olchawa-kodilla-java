@@ -10,7 +10,7 @@ public class Menu {
 
     public void makeChoice() {
 
-        String choice = commander.makeChoice();
+        String choice = null;
 
         switch (choice) {
             case "sudoku":

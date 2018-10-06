@@ -11,7 +11,7 @@ public class GameRunner {
         BasicConfigurator.configure();
         Board board = new Board();
         //Validator validator = new Validator(BoardFiller.testFiller());
-        GameRunner.setBoard(board);
+        GameRunner.setBoard1(board);
         //board = BoardFiller.testFiller();
 
 
@@ -21,7 +21,7 @@ public class GameRunner {
 
             resolver.resolve();
             log.debug(resolver.getBoard().toString());
-
+            log.info(resolver.getBoard().toString());
 
     }
 
@@ -36,6 +36,13 @@ public class GameRunner {
         board.getFields()[6][6].setValue(7);
         board.getFields()[7][7].setValue(8);
         board.getFields()[8][8].setValue(9);
+
+
+    }
+
+    static void setBoard1(Board board){
+
+
 
 
     }

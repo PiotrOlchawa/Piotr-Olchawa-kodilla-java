@@ -2,9 +2,6 @@ package com.kodilla.sudoku;
 
 import lombok.extern.log4j.Log4j;
 
-import java.util.Arrays;
-import java.util.Random;
-
 @Log4j
 public class Resolver {
 
@@ -23,13 +20,6 @@ public class Resolver {
     boolean resolve() throws CloneNotSupportedException {
 
         while (!board.isBoardCompleted()) {
-
-          /*  try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-
             log.debug(board.toString());
             if(Validator.checkBoardForZero(board)){
                 log.debug("!board.isBoardCompleted()");
@@ -37,9 +27,7 @@ public class Resolver {
             }
             validator.setBoard(this.board);
             if (!validator.validate(board)) System.exit(1);
-
             while (!processRowColumnSection()) {
-
                 if(Validator.checkBoardForZero(board)){
                     log.debug("!processRowColumnSection()");
                     System.exit(0);
@@ -50,9 +38,15 @@ public class Resolver {
                 processRowColumnSection();
                 log.debug(this.board.toString());
             }
-
         }
-        return true;
+        if(validator.validate(board)){
+            log.debug("Board is valid.");
+            return true;
+        }else {
+            log.debug("Board is invalid");
+            return false;
+        }
+
     }
 
 
@@ -108,17 +102,19 @@ public class Resolver {
         for (int i = 0; i < field.getAvailableValueList().size(); i++) {
             int availableValue = field.getAvailableValueList().get(i);
             for (int column = 0; column < Board.BOARD_SIZE; column++) {
-                if (board.getFields()[row][column].getAvailableValueList().contains(availableValue)) {
+                Field checkedField = board.getFields()[row][column];
+                if ((checkedField.getAvailableValueList().contains(availableValue)) || (checkedField.getValue() == availableValue)) {
+                    //log.info(checkedField.getAvailableValueList() +" "+ checkedField.getValue() +" value "+ availableValue);
                     writeValue = false;
-                    //log.debug("row contains" + availableValue);
                 }
             }
             if (writeValue) {
                 field.setValue(availableValue);
-                log.debug("processRow" + availableValue);
+                log.info("processRow" + availableValue);
                 return true;
             }
         }
+
         return deleteOperation;
         //}
         //log.debug("Column Last Value");
@@ -153,20 +149,26 @@ public class Resolver {
                 }
             }
         }
+
+
         boolean writeValue = true;
         for (int i = 0; i < field.getAvailableValueList().size(); i++) {
             int availableValue = field.getAvailableValueList().get(i);
             for (int row = 0; row < Board.BOARD_SIZE; row++) {
-                if (board.getFields()[row][column].getAvailableValueList().contains(availableValue)) {
+                Field checkedField = board.getFields()[row][column];
+                if ((checkedField.getAvailableValueList().contains(availableValue)) || (checkedField.getValue() == availableValue)) {
                     writeValue = false;
                 }
             }
             if (writeValue) {
                 field.setValue(availableValue);
-                log.debug("processColumn" + availableValue);
+                log.info("processColumn" + availableValue);
                 return true;
             }
         }
+
+
+
         return deleteOperation;
         //}
         //log.debug("Column Last Value");
@@ -211,20 +213,23 @@ public class Resolver {
                 }
             }
 
+
+
+
             boolean writeValue = true;
             for (int i = 0; i < field.getAvailableValueList().size(); i++) {
                 int availableValue = field.getAvailableValueList().get(i);
                 for (int rr = subsectionRowStart; rr < subsectionRowEnd; rr++) {
                     for (int cc = subsectionColumnStart; cc < subsectionColumnEnd; cc++) {
-                        if (board.getFields()[rr][cc].getAvailableValueList().contains(availableValue)) {
+                        Field checkedField = board.getFields()[row][column];
+                        if ((board.getFields()[rr][cc].getAvailableValueList().contains(availableValue)) || (checkedField.getValue() == availableValue)) {
                             writeValue = false;
-                            //log.debug("section contains" + availableValue);
                         }
                     }
                 }
                 if (writeValue) {
                     field.setValue(availableValue);
-                    log.debug("processSection" + availableValue);
+                    log.info("processSection" + availableValue);
                     return true;
                 }
             }

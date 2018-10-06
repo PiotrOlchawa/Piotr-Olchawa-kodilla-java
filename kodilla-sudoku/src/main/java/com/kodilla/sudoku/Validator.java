@@ -20,9 +20,6 @@ public class Validator {
 
     boolean validate(Board board) {
         this.board = board;
-        //log.debug("validateRow " + validateRow());
-        //log.debug("validateColumn " + validateColumn());
-        //log.debug("validateSection " + validateSection());
         return validateRow() && validateColumn() && validateSection();
     }
 

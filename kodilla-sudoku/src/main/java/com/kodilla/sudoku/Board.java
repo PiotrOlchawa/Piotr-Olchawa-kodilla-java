@@ -14,7 +14,7 @@ public class Board extends Prototype {
 
     static final int BOARD_SIZE = 9;
     static final int SUBSECTION_SIZE = 3;
-    private static final String BOARD_HORIZONTAL_HEADER = "    1   2   3   4   5   6   7   8   9\n";
+    private static final String BOARD_HORIZONTAL_HEADER = "\n\n    1    2    3    4    5    6    7    8    9\n";
     private Field fields[][] = new Field[BOARD_SIZE][BOARD_SIZE];
 
     Board() {
@@ -63,28 +63,17 @@ public class Board extends Prototype {
 
     public Board deepCopy() throws CloneNotSupportedException {
         Board clonedBoard = shallowCopy();
-
         if(Validator.checkBoardForZero(clonedBoard)){
             log.debug("deepCopy() - shallowCopy()");
             System.exit(0);
         }
-/*        for (int row = 0; row < Board.BOARD_SIZE; row++){
-            for (int column = 0; column < Board.BOARD_SIZE; column++) {
-                log.debug(clonedBoard.fields[row][column].getAvailableValueList());
-            }
-        }*/
-
-
         clonedBoard.fields = new Field[BOARD_SIZE][BOARD_SIZE];
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             for (int column = 0; column < Board.BOARD_SIZE; column++) {
                 clonedBoard.fields[row][column] = new Field(row, column);
                 clonedBoard.fields[row][column].setValue(fields[row][column].getValue());
-                //for (int i = 0; i < fields[row][column].getAvailableValueList().size(); i++) {
-                    //clonedBoard.fields[row][column].getAvailableValueList().add(fields[row][column].getAvailableValueList().get(i));
-                    clonedBoard.fields[row][column].setAvailableValueList(new ArrayList<>(fields[row][column].getAvailableValueList()));
+                clonedBoard.fields[row][column].setAvailableValueList(new ArrayList<>(fields[row][column].getAvailableValueList()));
                 clonedBoard.fields[row][column].setAvailableValueList(fields[row][column].getAvailableValueList().stream().collect(Collectors.toList()));
-                    //}
                 clonedBoard.fields[row][column].setCoordinatex(fields[row][column].getCoordinatex());
                 clonedBoard.fields[row][column].setCoordinatey(fields[row][column].getCoordinatey());
             }
