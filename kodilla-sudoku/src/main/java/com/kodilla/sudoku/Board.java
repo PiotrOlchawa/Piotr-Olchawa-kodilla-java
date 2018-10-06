@@ -1,8 +1,12 @@
 package com.kodilla.sudoku;
 
+import lombok.extern.log4j.Log4j;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+
+@Log4j
 public class Board extends Prototype {
 
     //prptotype -zgadywanie
@@ -59,6 +63,18 @@ public class Board extends Prototype {
 
     public Board deepCopy() throws CloneNotSupportedException {
         Board clonedBoard = shallowCopy();
+
+        if(Validator.checkBoardForZero(clonedBoard)){
+            log.debug("deepCopy() - shallowCopy()");
+            System.exit(0);
+        }
+/*        for (int row = 0; row < Board.BOARD_SIZE; row++){
+            for (int column = 0; column < Board.BOARD_SIZE; column++) {
+                log.debug(clonedBoard.fields[row][column].getAvailableValueList());
+            }
+        }*/
+
+
         clonedBoard.fields = new Field[BOARD_SIZE][BOARD_SIZE];
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             for (int column = 0; column < Board.BOARD_SIZE; column++) {
@@ -72,6 +88,11 @@ public class Board extends Prototype {
                 clonedBoard.fields[row][column].setCoordinatex(fields[row][column].getCoordinatex());
                 clonedBoard.fields[row][column].setCoordinatey(fields[row][column].getCoordinatey());
             }
+        }
+
+        if(Validator.checkBoardForZero(clonedBoard)){
+            log.debug("deepCopy() - full");
+            System.exit(0);
         }
         return clonedBoard;
     }

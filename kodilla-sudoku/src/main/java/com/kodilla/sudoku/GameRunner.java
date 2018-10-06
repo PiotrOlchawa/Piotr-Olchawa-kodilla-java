@@ -11,8 +11,8 @@ public class GameRunner {
         BasicConfigurator.configure();
         Board board = new Board();
         //Validator validator = new Validator(BoardFiller.testFiller());
-        //GameRunner.setBoard(board);
-        board = BoardFiller.testFiller();
+        GameRunner.setBoard(board);
+        //board = BoardFiller.testFiller();
 
 
         Resolver resolver = new Resolver(board);

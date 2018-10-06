@@ -58,12 +58,4 @@ public class Field {
         this.availableValueList = new ArrayList<>(Arrays.asList(valueList));
     }
 
-    public void resetField() {
-        this.value = NO_VALUE;
-    }
-
-    public void addToAvailableValueList(int fieldValue)
-    {
-        availableValueList.add(fieldValue);
-    }
 }

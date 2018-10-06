@@ -45,6 +45,7 @@ public class BoardFiller {
         field.deleteFromAvailableValueList(setValue);
         fillerEntity.setRowCoordinate(rowCoordinate);
         fillerEntity.setColumnCoordinate(columnCoordinate);
+        fillerEntity.setFieldValue(setValue);
         fillerEntities.add(fillerEntity);
         return true;
     }
@@ -56,11 +57,12 @@ public class BoardFiller {
             int row = lastEntity.getRowCoordinate();
             int column = lastEntity.getColumnCoordinate();
             Field field = board.getFields()[row][column];
-            field.resetField();
-            field.addToAvailableValueList(lastEntity.getFieldValue());
+            field.deleteFromAvailableValueList(lastEntity.getFieldValue());
+
             fillerEntities.remove(fillerEntities.size() - 1);
             log.debug("Recovering.. at " + row + " " + column);
             log.debug("Board from lastEntity " + board.toString());
+
             if(Validator.checkBoardForZero(board)){
                 log.debug("recoverFromFillField()");
                 System.exit(0);
