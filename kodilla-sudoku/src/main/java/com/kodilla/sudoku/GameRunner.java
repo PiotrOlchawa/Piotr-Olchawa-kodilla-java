@@ -6,40 +6,21 @@ import org.apache.log4j.BasicConfigurator;
 @Log4j
 public class GameRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
 
         BasicConfigurator.configure();
         Board board = new Board();
-        Validator validator = new Validator(BoardFiller.testFiller());
-        GameRunner.setBoard(board);
+        //Validator validator = new Validator(BoardFiller.testFiller());
+        //GameRunner.setBoard(board);
+        board = BoardFiller.testFiller();
 
 
-        System.out.println("orginal przed" +board.toString());
-        try {
-            Board board1 = board.deepCopy();
-            board1.getFields()[0][0].setValue(9);
-            System.out.println("kopia" +board1.toString());
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("zwykły" +board.toString());
-
-        Resolver resolver = new Resolver(BoardFiller.testFiller());
+        Resolver resolver = new Resolver(board);
         boolean result = false;
         int counter = 0;
-        //while(result = true){
 
-            //GameRunner.setBoard(board);
-            //resolver.resolve();
-            log.debug("Validate - validator " + validator.validate());
-            log.debug(BoardFiller.testFiller());
-            counter++;
             resolver.resolve();
             log.debug(resolver.getBoard().toString());
-        //}
-        //log.info(counter);
-        //System.out.println(board.toString());
-
 
 
     }

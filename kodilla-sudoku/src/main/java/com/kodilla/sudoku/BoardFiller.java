@@ -2,55 +2,79 @@ package com.kodilla.sudoku;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 public class BoardFiller {
 
     private static Random RANDOM = new Random();
-    private List<FillerEntity> fillerEntities = new ArrayList<>();
-    @Getter
-    @Setter
-    private Board board;
+    private List<FillerEntity> fillerEntities = new LinkedList<>();
 
-    public BoardFiller(Board board) {
-        this.board = board;
+    FillerEntity getLastFillerEntity(){
+        return fillerEntities.get(fillerEntities.size()-1);
     }
 
-    void fillField() throws CloneNotSupportedException {
+    boolean fillField(Board board) throws CloneNotSupportedException {
         int rowCoordinate, columnCoordinate;
         FillerEntity fillerEntity = new FillerEntity();
+
         fillerEntity.setBoard(board.deepCopy());
 
         do {
             rowCoordinate = randomCoordinateSelector();
             columnCoordinate = randomCoordinateSelector();
-        } while (!fieldHasNoValue(rowCoordinate, columnCoordinate));
+        } while (!fieldHasNoValue(rowCoordinate, columnCoordinate, board));
 
+        log.debug("wybrane pole" + rowCoordinate +" " + columnCoordinate);
         Field field = board.getFields()[rowCoordinate][columnCoordinate];
-        int randomlySelectedValue = randomAvaliableValueSelector(field.getAvailableValueList().size());
-        field.setValue(field.getAvailableValueList().get(randomlySelectedValue));
+        int size = field.getAvailableValueList().size();
+        if (size==0){
+            log.debug("filling error");
+            System.exit(1);
+            //return false;
+        }
+
+        int randomlySelectedValue = randomAvaliableValueSelector(size);
+        int setValue = field.getAvailableValueList().get(randomlySelectedValue);
+        log.debug("Filling at position " + rowCoordinate + columnCoordinate + " with value " + setValue);
+        field.setValue(setValue);
+        field.deleteFromAvailableValueList(setValue);
         fillerEntity.setRowCoordinate(rowCoordinate);
         fillerEntity.setColumnCoordinate(columnCoordinate);
-
         fillerEntities.add(fillerEntity);
+        return true;
     }
 
-    boolean recoverFromFillField(){
-        if(fillerEntities.size()!=0){
+    Board recoverFromFillField()  {
+        if (fillerEntities.size() != 0) {
             FillerEntity lastEntity = fillerEntities.get(fillerEntities.size() - 1);
-            this.board = lastEntity.getBoard();
+            Board board = lastEntity.getBoard();
             int row = lastEntity.getRowCoordinate();
             int column = lastEntity.getColumnCoordinate();
-            Field field = this.board.getFields()[row][column];
+            Field field = board.getFields()[row][column];
             field.resetField();
-            field.deleteValue(lastEntity.getFieldValue());
-        return true;
+            field.addToAvailableValueList(lastEntity.getFieldValue());
+            fillerEntities.remove(fillerEntities.size() - 1);
+            log.debug("Recovering.. at " + row + " " + column);
+            log.debug("Board from lastEntity " + board.toString());
+            if(Validator.checkBoardForZero(board)){
+                log.debug("recoverFromFillField()");
+                System.exit(0);
+            }
+
+            try {
+                return board.deepCopy();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
         }
-        return false;
+        log.debug("Error - nothing to recover.");
+        System.exit(1);
+        return new Board();
     }
 
 
@@ -62,7 +86,7 @@ public class BoardFiller {
         return RANDOM.nextInt(value);
     }
 
-    private boolean fieldHasNoValue(int row, int column) {
+    private boolean fieldHasNoValue(int row, int column,Board board) {
         return board.getFields()[row][column].hasNoValue();
     }
 

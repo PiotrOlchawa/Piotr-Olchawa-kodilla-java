@@ -12,12 +12,21 @@ public class Field {
     public static final int NO_VALUE = -1;
     public static final int MAX_VALUE = 9;
     @Getter
+    @Setter
     private List<Integer> availableValueList = new ArrayList<>();
     @Getter
     @Setter
     private int value = NO_VALUE;
+    @Getter
+    @Setter
+    int coordinatex;
+    @Getter
+    @Setter
+    int coordinatey;
 
-    Field() {
+    Field(int coordinatex, int coordinatey) {
+        this.coordinatex = coordinatex;
+        this.coordinatey = coordinatey;
         defaultAvaliableValueList();
     }
 
@@ -25,12 +34,12 @@ public class Field {
         return availableValueList.contains(value);
     }
 
-    void deleteValue(int value) {
+    void deleteFromAvailableValueList(int value) {
         availableValueList.remove(Integer.valueOf(value));
     }
 
-    boolean hasNoValue(){
-        if(value == NO_VALUE){
+    boolean hasNoValue() {
+        if (value == NO_VALUE) {
             return true;
         }
         return false;
@@ -51,5 +60,10 @@ public class Field {
 
     public void resetField() {
         this.value = NO_VALUE;
+    }
+
+    public void addToAvailableValueList(int fieldValue)
+    {
+        availableValueList.add(fieldValue);
     }
 }

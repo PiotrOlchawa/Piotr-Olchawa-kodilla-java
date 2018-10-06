@@ -42,7 +42,7 @@ public class RandomResolver {
         for (int column = 0; column < Board.BOARD_SIZE; column++) {
             int value = board.getFields()[row][column].getValue();
             if (field.checkAvailiableValue(value)) {
-                field.deleteValue(value);
+                field.deleteFromAvailableValueList(value);
             }
         }
     }
@@ -51,7 +51,7 @@ public class RandomResolver {
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             int value = board.getFields()[row][column].getValue();
             if (field.checkAvailiableValue(value)) {
-                field.deleteValue(value);
+                field.deleteFromAvailableValueList(value);
             }
         }
     }
@@ -65,7 +65,7 @@ public class RandomResolver {
             for (int c = subsectionColumnStart; c < subsectionColumnEnd; c++) {
                 int value = board.getFields()[r][c].getValue();
                 if (field.checkAvailiableValue(value)) {
-                    field.deleteValue(value);
+                    field.deleteFromAvailableValueList(value);
                 }
             }
         }
@@ -74,7 +74,7 @@ public class RandomResolver {
     private boolean processFieldForLastAvailiableValue(Field field) {
         if (field.getAvailableValueList().size() == 1) {
             field.setValue(field.getAvailableValueList().get(0));
-            field.deleteValue(0);
+            field.deleteFromAvailableValueList(0);
             return true;
         }
         return false;
