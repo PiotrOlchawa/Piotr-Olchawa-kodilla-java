@@ -3,18 +3,22 @@ package com.kodilla.sudoku;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
+@AllArgsConstructor
+@NoArgsConstructor
 public class Validator {
 
     @Getter
     @Setter
     Board board;
 
-    boolean validateNewEntry(int rowCoordinate, int columnCoordinate) {
+    public boolean validateNewEntry(int rowCoordinate, int columnCoordinate) {
         return validateOneRow(rowCoordinate) && validateOneColumn(columnCoordinate) && validateOneSection(rowCoordinate, columnCoordinate);
     }
 
@@ -42,7 +46,6 @@ public class Validator {
     private boolean validateOneRow(int row) {
         ArrayList<Integer> rowNumbers = new ArrayList<>();
         for (int column = 0; column < Board.BOARD_SIZE; column++) {
-            //log.debug(row + " " + column);
             int columnValue = board.getFields()[row][column].getValue();
             if (columnValue != Field.NO_VALUE) {
                 rowNumbers.add(columnValue);

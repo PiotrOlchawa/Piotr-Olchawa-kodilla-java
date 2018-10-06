@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FillerEntity {
+public class BoardFillerEntity {
 
     private Board board;
     private int rowCoordinate;

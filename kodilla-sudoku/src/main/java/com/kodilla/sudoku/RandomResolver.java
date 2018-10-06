@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 @Log4j
-public class RandomResolver {
+public class RandomResolver implements Resolver {
 
     private static Random RANDOM = new Random();
     Board board;
@@ -15,27 +15,28 @@ public class RandomResolver {
         this.board = board;
     }
 
-    boolean resolve() {
-        for (int row = 0; row < Board.BOARD_SIZE; row++) {
-            for (int column = 0; column < Board.BOARD_SIZE; column++) {
-                Field field = board.getFields()[row][column];
-                int fieldValue = board.getFields()[row][column].getValue();
-                if (fieldValue == Field.NO_VALUE) {
-                    processRow(field, row);
-                    processColumn(field, column);
-                    processSection(field, row, column);
-                    if (!setRandomValue(field)) {
-                        return false;
-                    }
-                } else {
+    @Override
+    public void resolve() {
+        while (!board.isBoardCompleted()) {
+            for (int row = 0; row < Board.BOARD_SIZE; row++) {
+                for (int column = 0; column < Board.BOARD_SIZE; column++) {
+                    Field field = board.getFields()[row][column];
+                    int fieldValue = board.getFields()[row][column].getValue();
+                    if (fieldValue == Field.NO_VALUE) {
+                        processRow(field, row);
+                        processColumn(field, column);
+                        processSection(field, row, column);
+                        if (!setRandomValue(field)) {
+                        }
+                    } else {
 
-                    if (field.getAvailableValueList().contains(fieldValue)) {
-                        field.getAvailableValueList().removeAll(Arrays.asList(fieldValue));
+                        if (field.getAvailableValueList().contains(fieldValue)) {
+                            field.getAvailableValueList().removeAll(Arrays.asList(fieldValue));
+                        }
                     }
                 }
             }
         }
-        return true;
     }
 
     private void processRow(Field field, int row) {
@@ -69,24 +70,6 @@ public class RandomResolver {
                 }
             }
         }
-    }
-
-    private boolean processFieldForLastAvailiableValue(Field field) {
-        if (field.getAvailableValueList().size() == 1) {
-            field.setValue(field.getAvailableValueList().get(0));
-            field.deleteFromAvailableValueList(0);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean setValue(Field field) {
-        if (field.getAvailableValueList().size() > 0) {
-            field.setValue(field.getAvailableValueList().get(0));
-            field.getAvailableValueList().remove(0);
-            return true;
-        }
-        return false;
     }
 
     private boolean setRandomValue(Field field) {
