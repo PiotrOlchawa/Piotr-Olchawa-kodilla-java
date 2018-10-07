@@ -1,61 +1,34 @@
-package com.kodilla.sudoku;
+package com.kodilla.sudoku.resolver;
 
+import com.kodilla.sudoku.*;
+import com.kodilla.sudoku.filler.Filler;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class KodillaResolver implements Resolver {
 
-    private BoardFiller boardFiller = new BoardFiller();
-    private Validator validator = new Validator();
+    private Filler boardFiller = new Filler();
     private Board board;
 
     public KodillaResolver(Board board) {
         this.board = board;
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
     @Override
-    public void resolve() {
-        log.info("Starting KodilaResolver");
-
+    public Board resolve() {
+        log.debug("Starting KodilaResolver");
         while (!board.isBoardCompleted()) {
-            if (Validator.checkBoardForZero(board)) {
-                log.debug("!board.isBoardCompleted()");
-                System.exit(0);
-            }
-            validator.setBoard(this.board);
-            if (!validator.validate(board)) System.exit(1);
             while (!processRowColumnSection()) {
-                if (Validator.checkBoardForZero(board)) {
-                    log.debug("!processRowColumnSection()");
-                    System.exit(0);
-                }
-                log.debug("Filling Board");
                 try {
                     boardFiller.fillField(this.board);
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                 }
-                log.debug("after filling");
-                processRowColumnSection();
-                log.debug(this.board.toString());
+               // processRowColumnSection();
             }
         }
-        Commander.showFinalValidation(board);
-
-/*        if(validator.validate(board)){
-            log.debug("Board is valid.");
-            return true;
-        }else {
-            log.debug("Board is invalid");
-            return false;
-        }*/
-
+        return board;
     }
-
 
     private boolean processRowColumnSection() {
         boolean result = false;
@@ -64,7 +37,6 @@ public class KodillaResolver implements Resolver {
                 Field field = board.getFields()[row][column];
                 int fieldValue = board.getFields()[row][column].getValue();
                 if (fieldValue == Field.NO_VALUE) {
-
                     result = result
                             || processRow(field, row)
                             || processColumn(field, column)
@@ -78,11 +50,6 @@ public class KodillaResolver implements Resolver {
 
 
     private boolean processRow(Field field, int row) {
-        if (Validator.checkBoardForZero(board)) {
-            log.debug("!processRow()");
-            System.exit(0);
-        }
-        //if (!processFieldForLastAvailiableValue(field)) {
         boolean deleteOperation = false;
         for (int column = 0; column < Board.BOARD_SIZE; column++) {
             int value = board.getFields()[row][column].getValue();
@@ -102,7 +69,6 @@ public class KodillaResolver implements Resolver {
                         }
                     }
                 }
-
             }
         }
         boolean writeValue = true;
@@ -111,7 +77,6 @@ public class KodillaResolver implements Resolver {
             for (int column = 0; column < Board.BOARD_SIZE; column++) {
                 Field checkedField = board.getFields()[row][column];
                 if ((checkedField.getAvailableValueList().contains(availableValue)) || (checkedField.getValue() == availableValue)) {
-                    //log.info(checkedField.getAvailableValueList() +" "+ checkedField.getValue() +" value "+ availableValue);
                     writeValue = false;
                 }
             }
@@ -121,19 +86,10 @@ public class KodillaResolver implements Resolver {
                 return true;
             }
         }
-
         return deleteOperation;
-        //}
-        //log.debug("Column Last Value");
-        //return true;
     }
 
     private boolean processColumn(Field field, int column) {
-        if (Validator.checkBoardForZero(board)) {
-            log.debug("!processColumn()");
-            System.exit(0);
-        }
-        //if (!processFieldForLastAvailiableValue(field)) {
         boolean deleteOperation = false;
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             int value = board.getFields()[row][column].getValue();
@@ -142,7 +98,6 @@ public class KodillaResolver implements Resolver {
                 if (field.getAvailableValueList().size() > 1) {
                     field.deleteFromAvailableValueList(value);
                     deleteOperation = true;
-                    //log.debug("Deleting at col");
                 }
                 // last value if is in other field --- recovery
                 if (field.getAvailableValueList().size() == 1) {
@@ -156,7 +111,6 @@ public class KodillaResolver implements Resolver {
                 }
             }
         }
-
 
         boolean writeValue = true;
         for (int i = 0; i < field.getAvailableValueList().size(); i++) {
@@ -173,20 +127,10 @@ public class KodillaResolver implements Resolver {
                 return true;
             }
         }
-
-
         return deleteOperation;
-        //}
-        //log.debug("Column Last Value");
-        //return true;
     }
 
     private boolean processSection(Field field, int row, int column) {
-        if (Validator.checkBoardForZero(board)) {
-            log.debug("!processSection()");
-            System.exit(0);
-        }
-        //if (!processFieldForLastAvailiableValue(field)) {
         int subsectionRowStart = (row / Board.SUBSECTION_SIZE) * Board.SUBSECTION_SIZE;
         int subsectionRowEnd = subsectionRowStart + Board.SUBSECTION_SIZE;
         int subsectionColumnStart = (column / Board.SUBSECTION_SIZE) * Board.SUBSECTION_SIZE;
@@ -196,12 +140,10 @@ public class KodillaResolver implements Resolver {
             for (int c = subsectionColumnStart; c < subsectionColumnEnd; c++) {
                 int value = board.getFields()[r][c].getValue();
                 if (field.checkAvailiableValue(value)) {
-
-                    //delete value from other
+                    // delete value from other
                     if (field.getAvailableValueList().size() > 1) {
                         field.deleteFromAvailableValueList(value);
                         deleteOperation = true;
-                        //log.debug("Deleting at col");
                     }
                     // last value if is in other field --- recovery
                     if (field.getAvailableValueList().size() == 1) {
@@ -218,7 +160,6 @@ public class KodillaResolver implements Resolver {
                     }
                 }
             }
-
 
             boolean writeValue = true;
             for (int i = 0; i < field.getAvailableValueList().size(); i++) {
@@ -239,9 +180,6 @@ public class KodillaResolver implements Resolver {
             }
         }
         return deleteOperation;
-        //}
-        //log.debug("Section Last Value");
-        //return true;
     }
 
     private boolean processFieldForLastAvailiableValue(Field field) {

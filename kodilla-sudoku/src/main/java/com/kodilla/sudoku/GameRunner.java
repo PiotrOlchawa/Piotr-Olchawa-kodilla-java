@@ -1,5 +1,6 @@
 package com.kodilla.sudoku;
 
+import com.kodilla.sudoku.filler.UserFiller;
 import lombok.extern.log4j.Log4j;
 import org.apache.log4j.BasicConfigurator;
 
@@ -9,8 +10,8 @@ public class GameRunner {
     public static void main(String[] args) {
         BasicConfigurator.configure();
         Board board = new Board();
-        BoardUserFiller boardUserFiller = new BoardUserFiller(board);
-        Menu menu = new Menu(boardUserFiller);
-        menu.startGame();
+        UserFiller boardUserFiller = new UserFiller(board);
+        MenuDriver menuDriver = new MenuDriver(boardUserFiller);
+        menuDriver.startGame();
     }
 }

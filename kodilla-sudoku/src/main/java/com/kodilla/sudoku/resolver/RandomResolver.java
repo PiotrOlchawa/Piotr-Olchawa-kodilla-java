@@ -1,29 +1,27 @@
-package com.kodilla.sudoku;
+package com.kodilla.sudoku.resolver;
 
+import com.kodilla.sudoku.Board;
+import com.kodilla.sudoku.Field;
+
+import com.kodilla.sudoku.Resolver;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 import java.util.Arrays;
 import java.util.Random;
 
 @Log4j
+@AllArgsConstructor
 public class RandomResolver implements Resolver {
 
     private static Random RANDOM = new Random();
     Board board;
 
-    public RandomResolver(Board board) {
-        this.board = board;
-    }
-
     @Override
-    public void resolve() {
+    public Board resolve() {
+        log.debug("Starting RandomResolver");
         while (!board.isBoardCompleted()) {
-/*            log.info(board.toString());
-            if(!board.isBoardCompleted()) {
-                board.resetBoard();
-            }*/
             board.resetBoard();
-
             for (int row = 0; row < Board.BOARD_SIZE; row++) {
                 for (int column = 0; column < Board.BOARD_SIZE; column++) {
                     Field field = board.getFields()[row][column];
@@ -35,7 +33,6 @@ public class RandomResolver implements Resolver {
                         if (!setRandomValue(field)) {
                         }
                     } else {
-
                         if (field.getAvailableValueList().contains(fieldValue)) {
                             field.getAvailableValueList().removeAll(Arrays.asList(fieldValue));
                         }
@@ -43,7 +40,7 @@ public class RandomResolver implements Resolver {
                 }
             }
         }
-        Commander.showFinalValidation(board);
+        return board;
     }
 
     private void processRow(Field field, int row) {

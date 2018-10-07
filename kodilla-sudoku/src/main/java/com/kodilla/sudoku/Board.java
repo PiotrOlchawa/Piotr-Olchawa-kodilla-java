@@ -2,26 +2,21 @@ package com.kodilla.sudoku;
 
 import lombok.extern.log4j.Log4j;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 
 @Log4j
 public class Board extends Prototype {
 
-    //prptotype -zgadywanie
-    //osobna klasa validacyjna do numerow usera, po kazdym inpucie.
-
-    static final int BOARD_SIZE = 9;
-    static final int SUBSECTION_SIZE = 3;
+    public static final int BOARD_SIZE = 9;
+    public static final int SUBSECTION_SIZE = 3;
     private static final String BOARD_HORIZONTAL_HEADER = "\n\n    1    2    3    4    5    6    7    8    9\n";
     private Field fields[][] = new Field[BOARD_SIZE][BOARD_SIZE];
 
-    Board() {
+    public Board() {
         initBoard();
     }
 
-    Field[][] getFields() {
+    public Field[][] getFields() {
         return this.fields;
     }
 
@@ -57,31 +52,22 @@ public class Board extends Prototype {
         return true;
     }
 
-    public Board shallowCopy() throws CloneNotSupportedException {
+    private Board shallowCopy() throws CloneNotSupportedException {
         return (Board) super.clone();
     }
 
     public Board deepCopy() throws CloneNotSupportedException {
         Board clonedBoard = shallowCopy();
-        if(Validator.checkBoardForZero(clonedBoard)){
-            log.debug("deepCopy() - shallowCopy()");
-            System.exit(0);
-        }
         clonedBoard.fields = new Field[BOARD_SIZE][BOARD_SIZE];
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             for (int column = 0; column < Board.BOARD_SIZE; column++) {
                 clonedBoard.fields[row][column] = new Field(row, column);
                 clonedBoard.fields[row][column].setValue(fields[row][column].getValue());
-                clonedBoard.fields[row][column].setAvailableValueList(new ArrayList<>(fields[row][column].getAvailableValueList()));
+                //clonedBoard.fields[row][column].setAvailableValueList(new ArrayList<>(fields[row][column].getAvailableValueList()));
                 clonedBoard.fields[row][column].setAvailableValueList(fields[row][column].getAvailableValueList().stream().collect(Collectors.toList()));
                 clonedBoard.fields[row][column].setCoordinatex(fields[row][column].getCoordinatex());
                 clonedBoard.fields[row][column].setCoordinatey(fields[row][column].getCoordinatey());
             }
-        }
-
-        if(Validator.checkBoardForZero(clonedBoard)){
-            log.debug("deepCopy() - full");
-            System.exit(0);
         }
         return clonedBoard;
     }

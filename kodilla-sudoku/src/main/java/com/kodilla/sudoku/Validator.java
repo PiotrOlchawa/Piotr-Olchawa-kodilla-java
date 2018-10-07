@@ -28,21 +28,22 @@ public class Validator {
         return validateRow() && validateColumn() && validateSection();
     }
 
-
-    public boolean checkBoard(Board board) {
-        for (int row = 0; row < Board.BOARD_SIZE; row = row + Board.SUBSECTION_SIZE) {
-            for (int column = 0; column < Board.BOARD_SIZE; column = column + Board.SUBSECTION_SIZE) {
-                Field field = board.getFields()[row][column];
-                if (field.getValue()==Field.NO_VALUE){
-                    if(field.getAvailableValueList().size()==0){
-                        return false;
-                    }
+    static boolean validateNumber(char[] fieldChar) {
+        if (fieldChar.length != 3) {
+            return false;
+        }
+        for (int i = 0; i < fieldChar.length; i++) {
+            try {
+                int value = Integer.parseInt(String.valueOf(fieldChar[i]));
+                if (value < Field.MIN_VALUE || value > Field.MAX_VALUE) {
+                    return false;
                 }
+            } catch (NumberFormatException e) {
+                return false;
             }
         }
         return true;
     }
-
 
     private boolean validateOneRow(int row) {
         ArrayList<Integer> rowNumbers = new ArrayList<>();
@@ -78,6 +79,7 @@ public class Validator {
         return true;
     }
 
+    @SuppressWarnings("Duplicates")
     private boolean validateOneSection(int row, int column) {
         ArrayList<Integer> sectionNumbers = new ArrayList<>();
         int subsectionRowStart = (row / Board.SUBSECTION_SIZE) * Board.SUBSECTION_SIZE;
@@ -167,20 +169,4 @@ public class Validator {
         }
         return true;
     }
-
-    static boolean checkBoardForZero(Board board){
-        for (int row = 0; row < Board.BOARD_SIZE; row = row + Board.SUBSECTION_SIZE) {
-            for (int column = 0; column < Board.BOARD_SIZE; column = column + Board.SUBSECTION_SIZE) {
-                if (board.getFields()[row][column].getAvailableValueList().contains(0)){
-                    log.debug("=================== ZERO BOARD CONTAINS ====================== at " +board.getFields()[row][column].getCoordinatex()+board.getFields()[row][column].getCoordinatey());
-                    log.debug(board.getFields()[row][column].getAvailableValueList());
-                    log.debug(board.toString());
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
 }

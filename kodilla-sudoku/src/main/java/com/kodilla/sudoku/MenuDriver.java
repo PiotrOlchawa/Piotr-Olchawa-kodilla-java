@@ -1,14 +1,15 @@
 package com.kodilla.sudoku;
 
+import com.kodilla.sudoku.filler.UserFiller;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Menu {
+class MenuDriver {
 
-    BoardUserFiller boardUserFiller;
+    private UserFiller boardUserFiller;
 
-    public void startGame() {
-        Commander.getWelcome();
+    void startGame() {
+        Commander.showWelcome();
         while (true) {
             makeChoice();
         }
@@ -41,14 +42,13 @@ public class Menu {
     }
 
     private void exitSudoku() {
-        Commander.getExit();
+        Commander.showExit();
         System.exit(0);
     }
 
     private void resolveSudoku(Resolver resolver) {
         Commander.getFinalSolution();
-        resolver.resolve();
-        boardUserFiller.getBoard().toString();
+        Commander.showFinalValidation(resolver.resolve());
     }
 
     private Resolver selectResolver() {
