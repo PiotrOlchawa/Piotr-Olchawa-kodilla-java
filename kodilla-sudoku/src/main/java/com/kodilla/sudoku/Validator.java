@@ -19,6 +19,7 @@ public class Validator {
     Board board;
 
     public boolean validateNewEntry(int rowCoordinate, int columnCoordinate) {
+        log.info("Inside validator " +board.toString());
         return validateOneRow(rowCoordinate) && validateOneColumn(columnCoordinate) && validateOneSection(rowCoordinate, columnCoordinate);
     }
 

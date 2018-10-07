@@ -19,9 +19,9 @@ public class KodillaResolver implements Resolver {
 
     @Override
     public void resolve() {
+        log.info("Starting KodilaResolver");
 
         while (!board.isBoardCompleted()) {
-            log.debug(board.toString());
             if (Validator.checkBoardForZero(board)) {
                 log.debug("!board.isBoardCompleted()");
                 System.exit(0);
@@ -44,6 +44,8 @@ public class KodillaResolver implements Resolver {
                 log.debug(this.board.toString());
             }
         }
+        Commander.showFinalValidation(board);
+
 /*        if(validator.validate(board)){
             log.debug("Board is valid.");
             return true;

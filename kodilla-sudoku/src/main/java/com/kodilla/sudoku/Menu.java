@@ -20,25 +20,22 @@ public class Menu {
                 exitSudoku();
                 break;
             case 'n':
-                restartSudoku();
+                startSudoku();
                 break;
             default:
         }
     }
 
-    private Resolver selectResolver() {
-        return Commander.getResolver(boardUserFiller.getBoard());
-    }
-
-    private void restartSudoku() {
+    private void startSudoku() {
         boardUserFiller.getBoard().resetBoard();
         while (true) {
             String entry = Commander.getUserEntry();
-            if (entry.equals(Commander.getSolutionCommand()))   {
+            if (entry.equals(Commander.getSolutionCommand())) {
                 resolveSudoku(selectResolver());
                 break;
-            } else {
+            } else if (Commander.checkUserEntry(entry)) {
                 boardUserFiller.fillSingleField(entry);
+                System.out.println(boardUserFiller.getBoard().toString());
             }
         }
     }
@@ -52,6 +49,10 @@ public class Menu {
         Commander.getFinalSolution();
         resolver.resolve();
         boardUserFiller.getBoard().toString();
+    }
+
+    private Resolver selectResolver() {
+        return Commander.getResolver(boardUserFiller.getBoard());
     }
 }
 

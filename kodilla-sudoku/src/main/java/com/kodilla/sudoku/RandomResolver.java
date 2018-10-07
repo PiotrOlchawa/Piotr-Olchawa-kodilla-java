@@ -18,6 +18,12 @@ public class RandomResolver implements Resolver {
     @Override
     public void resolve() {
         while (!board.isBoardCompleted()) {
+/*            log.info(board.toString());
+            if(!board.isBoardCompleted()) {
+                board.resetBoard();
+            }*/
+            board.resetBoard();
+
             for (int row = 0; row < Board.BOARD_SIZE; row++) {
                 for (int column = 0; column < Board.BOARD_SIZE; column++) {
                     Field field = board.getFields()[row][column];
@@ -37,6 +43,7 @@ public class RandomResolver implements Resolver {
                 }
             }
         }
+        Commander.showFinalValidation(board);
     }
 
     private void processRow(Field field, int row) {
