@@ -18,14 +18,9 @@ public class Validator {
     @Setter
     Board board;
 
-    public boolean validateNewEntry(int rowCoordinate, int columnCoordinate) {
-        log.info("Inside validator " +board.toString());
-        return validateOneRow(rowCoordinate) && validateOneColumn(columnCoordinate) && validateOneSection(rowCoordinate, columnCoordinate);
-    }
-
-    boolean validate(Board board) {
-        this.board = board;
-        return validateRow() && validateColumn() && validateSection();
+    public static boolean validateNewEntry(int rowCoordinate, int columnCoordinate, Board board) {
+        log.info("Inside validator " + board.toString());
+        return validateOneRow(rowCoordinate, board) && validateOneColumn(columnCoordinate, board) && validateOneSection(rowCoordinate, columnCoordinate, board);
     }
 
     static boolean validateNumber(char[] fieldChar) {
@@ -45,7 +40,7 @@ public class Validator {
         return true;
     }
 
-    private boolean validateOneRow(int row) {
+    private static boolean validateOneRow(int row, Board board) {
         ArrayList<Integer> rowNumbers = new ArrayList<>();
         for (int column = 0; column < Board.BOARD_SIZE; column++) {
             int columnValue = board.getFields()[row][column].getValue();
@@ -62,7 +57,7 @@ public class Validator {
         return true;
     }
 
-    private boolean validateOneColumn(int column) {
+    private static boolean validateOneColumn(int column, Board board) {
         ArrayList<Integer> columnNumbers = new ArrayList<>();
         for (int row = 0; row < Board.BOARD_SIZE; row++) {
             int rowValue = board.getFields()[row][column].getValue();
@@ -75,12 +70,12 @@ public class Validator {
             log.debug("validateOneColumn error " + columnNumbers + " " + numberSet + " at " + column);
             return false;
         }
-        log.debug("validateOneColumn true at column " +column);
+        log.debug("validateOneColumn true at column " + column);
         return true;
     }
 
     @SuppressWarnings("Duplicates")
-    private boolean validateOneSection(int row, int column) {
+    private static boolean validateOneSection(int row, int column, Board board) {
         ArrayList<Integer> sectionNumbers = new ArrayList<>();
         int subsectionRowStart = (row / Board.SUBSECTION_SIZE) * Board.SUBSECTION_SIZE;
         int subsectionRowEnd = subsectionRowStart + Board.SUBSECTION_SIZE;
@@ -99,8 +94,13 @@ public class Validator {
             log.debug("validateOneSection error " + sectionNumbers + " " + numberSet + " at " + subsectionRowStart + " " + subsectionColumnStart);
             return false;
         }
-        log.debug("validateOneSection true at rol col " +row + column);
+        log.debug("validateOneSection true at rol col " + row + column);
         return true;
+    }
+
+    boolean validate(Board board) {
+        this.board = board;
+        return validateRow() && validateColumn() && validateSection();
     }
 
     @SuppressWarnings("Duplicates")
@@ -169,4 +169,14 @@ public class Validator {
         }
         return true;
     }
+
+    static boolean checkUserEntry(String entry) {
+        char[] fieldChar = entry.toCharArray();
+        if (!Validator.validateNumber(fieldChar)) {
+            Commander.badNumber();
+            return false;
+        }
+        return true;
+    }
+
 }

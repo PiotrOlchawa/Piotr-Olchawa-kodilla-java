@@ -58,15 +58,6 @@ public class Commander {
         }
     }
 
-    static boolean checkUserEntry(String entry) {
-        char[] fieldChar = entry.toCharArray();
-        if (!Validator.validateNumber(fieldChar)) {
-            badNumber();
-            return false;
-        }
-        return true;
-    }
-
     static void showFinalValidation(Board board) {
         if (new Validator(board).validate(board)) {
             System.out.println(VALID_BOARD);
@@ -77,9 +68,29 @@ public class Commander {
         }
     }
 
+    public static void showValidationError() {
+        System.out.println(BAD_VALIDATION_ERROR);
+    }
+
     static String getUserEntry() {
         System.out.println(INPUT_NUMBER);
         return SCANNER.nextLine();
+    }
+
+    static String getSolutionCommand() {
+        return SUDOKU_RESOLVE_COMMAND;
+    }
+
+    static void showWelcome() {
+        System.out.println(WELCOME);
+    }
+
+    static void getFinalSolution() {
+        System.out.println(SUDOKU_SOLUTION);
+    }
+
+    static void showExit() {
+        System.out.println(EXITING);
     }
 
     private static void badResolver() {
@@ -87,40 +98,19 @@ public class Commander {
         System.out.println(RESOLVER);
     }
 
-
-    public static void badNumber() {
+    static void badNumber() {
         System.out.println(BAD_NUMBER);
     }
 
-    public static void showValidationError() {
-        System.out.println(BAD_VALIDATION_ERROR);
-    }
-
-    public static String getSolutionCommand() {
-        return SUDOKU_RESOLVE_COMMAND;
-    }
-
-    public static void askForGameAction() {
+    private static void askForGameAction() {
         System.out.println(ASK_FOR_GAME_ACTION);
     }
 
-    public static void badGameActionInput() {
+    private static void badGameActionInput() {
         System.out.println(BAD_GAME_ACTION);
     }
 
-    public static void showWelcome() {
-        System.out.println(WELCOME);
-    }
-
-    public static void askForResolver() {
+    private static void askForResolver() {
         System.out.println(RESOLVER);
-    }
-
-    public static void getFinalSolution() {
-        System.out.println(SUDOKU_SOLUTION);
-    }
-
-    public static void showExit() {
-        System.out.println(EXITING);
     }
 }

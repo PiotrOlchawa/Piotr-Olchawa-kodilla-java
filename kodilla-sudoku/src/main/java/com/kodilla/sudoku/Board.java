@@ -1,5 +1,6 @@
 package com.kodilla.sudoku;
 
+import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 
 import java.util.stream.Collectors;
@@ -10,18 +11,11 @@ public class Board extends Prototype {
     public static final int BOARD_SIZE = 9;
     public static final int SUBSECTION_SIZE = 3;
     private static final String BOARD_HORIZONTAL_HEADER = "\n\n    1    2    3    4    5    6    7    8    9\n";
+    @Getter
     private Field fields[][] = new Field[BOARD_SIZE][BOARD_SIZE];
 
     public Board() {
         initBoard();
-    }
-
-    public Field[][] getFields() {
-        return this.fields;
-    }
-
-    public void setFields(Field[][] fields) {
-        this.fields = fields;
     }
 
     public void resetBoard() {
@@ -63,7 +57,6 @@ public class Board extends Prototype {
             for (int column = 0; column < Board.BOARD_SIZE; column++) {
                 clonedBoard.fields[row][column] = new Field(row, column);
                 clonedBoard.fields[row][column].setValue(fields[row][column].getValue());
-                //clonedBoard.fields[row][column].setAvailableValueList(new ArrayList<>(fields[row][column].getAvailableValueList()));
                 clonedBoard.fields[row][column].setAvailableValueList(fields[row][column].getAvailableValueList().stream().collect(Collectors.toList()));
                 clonedBoard.fields[row][column].setCoordinatex(fields[row][column].getCoordinatex());
                 clonedBoard.fields[row][column].setCoordinatey(fields[row][column].getCoordinatey());

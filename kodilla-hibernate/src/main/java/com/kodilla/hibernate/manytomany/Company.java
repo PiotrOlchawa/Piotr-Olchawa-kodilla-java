@@ -5,11 +5,17 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Company.retrieveCompanyNameWith",
+        query = "FROM Company WHERE company_name like :LAST")
+
 @NamedNativeQuery(
         name = "Company.retrieveCompanyNameStartsWith",
         query = "SELECT * FROM companies WHERE LEFT(COMPANY_NAME, 3) = :THREESTARTSWITH",
         resultClass = Company.class
 )
+
+
 
 @Entity
 @Table(name = "COMPANIES")

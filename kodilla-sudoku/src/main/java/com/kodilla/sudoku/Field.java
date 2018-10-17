@@ -7,23 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
+@Setter
 public class Field {
 
     public static final int NO_VALUE = -1;
     public static final int MAX_VALUE = 9;
     public static final int MIN_VALUE = 1;
-
-    @Getter
-    @Setter
     private List<Integer> availableValueList = new ArrayList<>();
-    @Getter
-    @Setter
     private int value = NO_VALUE;
-    @Getter
-    @Setter
     int coordinatex;
-    @Getter
-    @Setter
     int coordinatey;
 
     Field(int coordinatex, int coordinatey) {

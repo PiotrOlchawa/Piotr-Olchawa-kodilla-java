@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class UserFiller {
-    private Validator validator = new Validator();
     @Getter
     private Board board;
 
@@ -22,8 +21,7 @@ public class UserFiller {
         try {
             Board boardDeepCopy = board.deepCopy();
             boardDeepCopy.getFields()[field[0] - 1][field[1] - 1].setValue(field[2]);
-            validator.setBoard(boardDeepCopy);
-            if (!validator.validateNewEntry((field[0] - 1), (field[1] - 1))) {
+            if (!Validator.validateNewEntry((field[0] - 1), (field[1] - 1),boardDeepCopy)) {
                 Commander.showValidationError();
             } else {
                 board.getFields()[field[0] - 1][field[1] - 1].setValue(field[2]);

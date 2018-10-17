@@ -1,5 +1,9 @@
 package com.kodilla.sudoku.resolver;
 
+//findAny findFirst roznice
+
+
+
 import com.kodilla.sudoku.*;
 import com.kodilla.sudoku.filler.Filler;
 import lombok.extern.log4j.Log4j;
@@ -13,6 +17,9 @@ public class KodillaResolver implements Resolver {
     public KodillaResolver(Board board) {
         this.board = board;
     }
+
+
+    // suma el kolumna i wiersz
 
     @Override
     public Board resolve() {

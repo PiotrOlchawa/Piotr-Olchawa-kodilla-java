@@ -1,17 +1,35 @@
 package com.kodilla.sudoku;
 
 import com.kodilla.sudoku.filler.UserFiller;
-import lombok.extern.log4j.Log4j;
 import org.apache.log4j.BasicConfigurator;
 
-@Log4j
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class GameRunner {
 
     public static void main(String[] args) {
+
+        List<Adress> adresy = new ArrayList<>();
+
+        adresy.add(new Adress("Tarnów","Krakowsa"));
+        adresy.add(new Adress("Tarnów","Lwowska"));
+        adresy.add(new Adress("Brzesko","Głowackiego"));
+
+       Map<String,List<Adress>> hashMap =adresy.stream().collect(
+               Collectors.groupingBy(Adress::getCity, Collectors.toList()));
+
+        Map<String,List<String>> hashMap1 =adresy.stream().collect(
+                Collectors.groupingBy(Adress::getCity,
+                        Collectors.mapping(Adress::getStreet, Collectors.toList())));
+        System.out.println(hashMap1);
+
+
         BasicConfigurator.configure();
         Board board = new Board();
         UserFiller boardUserFiller = new UserFiller(board);
         MenuDriver menuDriver = new MenuDriver(boardUserFiller);
         menuDriver.startGame();
+
     }
 }

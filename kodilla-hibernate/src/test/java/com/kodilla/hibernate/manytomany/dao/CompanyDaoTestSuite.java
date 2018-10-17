@@ -83,11 +83,12 @@ public class CompanyDaoTestSuite {
         employeeDao.save(lindaKovalsky);
 
         //When
-        int companies = companyDao.retrieveCompanyNameStartsWith("Sof").size();
+        int companies = companyDao.retrieveCompanyNameWith("Sof").size();
         int employees = employeeDao.retrieveEmployeeWithLastName("Smith").size();
+        //System.out.println("---------------------------------" + employeeDao.retrieveEmployeeWithLastNameWith("Smi").size());
 
         //Then
-        Assert.assertEquals(1,companies);
+        Assert.assertEquals(4,companies);
         Assert.assertEquals(1,employees);
 
         //CleanUp

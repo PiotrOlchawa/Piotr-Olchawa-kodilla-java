@@ -3,6 +3,12 @@ package com.kodilla.sudoku;
 import com.kodilla.sudoku.filler.UserFiller;
 import lombok.AllArgsConstructor;
 
+//wydielenie jako service
+// readme.md
+// osobny modul
+
+
+
 @AllArgsConstructor
 class MenuDriver {
 
@@ -34,7 +40,7 @@ class MenuDriver {
             if (entry.equals(Commander.getSolutionCommand())) {
                 resolveSudoku(selectResolver());
                 break;
-            } else if (Commander.checkUserEntry(entry)) {
+            } else if (Validator.checkUserEntry(entry)) {
                 boardUserFiller.fillSingleField(entry);
                 System.out.println(boardUserFiller.getBoard().toString());
             }
